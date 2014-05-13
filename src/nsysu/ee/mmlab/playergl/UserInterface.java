@@ -154,8 +154,9 @@ public class UserInterface extends Activity {
 			//mHeight = mTextureView.getHeight();
 			//mWidth = mTextureView.getWidth();			
 					
-			//mDecoder= new MediaDecoder(file_Path,mOutputSurface,mWidth,mHeight,mHolder);
-			//mDecoder.doDecode();	
+			mDecoder= new MediaDecoder(file_Path,mWidth,mHeight,mHolder);
+			mDecoder.doDecode();	
+			/*
 			Thread t = new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -169,7 +170,7 @@ public class UserInterface extends Activity {
 					}
 				}			
 			});
-			t.start();
+			t.start();*/
 			
 			Log.v("Panel Activity","OutputSurface Created" );			
 			

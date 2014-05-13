@@ -93,22 +93,22 @@ public class MediaDecoder {
 	public void doDecode()
 	{
 		
+				
+		//DecodeFrame();
 		
-		initOutputSurface(mWidth,mHeight,mSurfaceHolder);
-		DecodeFrame();
-		/*
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {				
-					
+					initOutputSurface(mWidth,mHeight,mSurfaceHolder);
+					initCodec();					
 					DecodeFrame();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}			
 		});
-		t.start();*/
+		t.start();
 		
 	}
 	public void ReleaseSource()
