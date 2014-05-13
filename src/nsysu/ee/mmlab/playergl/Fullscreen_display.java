@@ -137,9 +137,7 @@ public class Fullscreen_display extends Activity {
 					
 				}
 				
-			});
-			
-			
+			});			
 			
 		}	
 		
@@ -153,7 +151,7 @@ public class Fullscreen_display extends Activity {
 				public void run() {
 					try {
 						
-						mDecoder= new MediaDecoder(file_Path,mOutputSurface,mWidth,mHeight,mHolder);						
+						mDecoder= new MediaDecoder(file_Path,mWidth,mHeight,mHolder);						
 						mDecoder.doDecode();	
 						
 					} catch (Exception e) {

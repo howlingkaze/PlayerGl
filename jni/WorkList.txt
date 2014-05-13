@@ -28,6 +28,6 @@ Outputsurface determine the frame size(offscreen-render target).
 The real display surface used to display the result is defined in layout xml. 
 Which the size of its buffer can be change on your need. As long as its match the W/H ratio of the input video
 
-To do lost:
+To do list:
 1. Design the decode-->Post process(fragment shader or something else) --> display  architecture take these two states into consideration.
-2. 
+2. Close the decoder right after the end of the video.  <==  
