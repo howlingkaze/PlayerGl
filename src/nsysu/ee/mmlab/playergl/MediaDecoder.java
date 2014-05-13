@@ -22,14 +22,18 @@ public class MediaDecoder {
 	final static String VIDEO_MIME_PREFIX = "video/"; 
 	private int mVideoTrackIndex = -1;
 	private OutputSurface mOutputSurface;
+	private SurfaceHolder mSurfaceHolder;
+	private int mWidth,mHeight;
 	
-	
-	public MediaDecoder(String path ,OutputSurface out ,int width, int height ,SurfaceHolder mHolder)
+	public MediaDecoder(String path ,int width, int height ,SurfaceHolder mHolder)
 	{		
-		mPath = path;			
-		mOutputSurface = out;
-		initOutputSurface(width,height,mHolder);
+		mPath = path;		
+		
+		mSurfaceHolder=mHolder;
+		mWidth=width;
+		mHeight=height;		
 		initCodec();
+		//initOutputSurface(mWidth,mHeight,mSurfaceHolder);
 		
 	}
 	
@@ -88,17 +92,24 @@ public class MediaDecoder {
 	
 	public void doDecode()
 	{
-		DecodeFrame();/*
+		
+				
+		//DecodeFrame();
+		
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {				
+					initOutputSurface(mWidth,mHeight,mSurfaceHolder);
+					initCodec();					
 					DecodeFrame();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}			
-		}); t.start();*/
+		});
+		t.start();
+		
 	}
 	public void ReleaseSource()
 	{
@@ -179,9 +190,7 @@ public class MediaDecoder {
             if (!outputDone) {
                 int decoderStatus = mMediaCodec.dequeueOutputBuffer(info, TIMEOUT_USEC);
                 
-                
-                
-                
+                           
                 if (decoderStatus == MediaCodec.INFO_TRY_AGAIN_LATER)
                 {
                     // no output available yet

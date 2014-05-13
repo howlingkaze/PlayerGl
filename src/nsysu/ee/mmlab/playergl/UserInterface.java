@@ -68,7 +68,6 @@ public class UserInterface extends Activity {
 		SurfaceHolder mHolder;
 		
 		MediaDecoder mDecoder;
-		OutputSurface mOutputSurface;
 		int mHeight,mWidth;
 		
 		public Fragment_setting() {			
@@ -155,21 +154,25 @@ public class UserInterface extends Activity {
 			//mHeight = mTextureView.getHeight();
 			//mWidth = mTextureView.getWidth();			
 					
+			mDecoder= new MediaDecoder(file_Path,mWidth,mHeight,mHolder);
+			mDecoder.doDecode();	
+			/*
 			Thread t = new Thread(new Runnable() {
 				@Override
 				public void run() {
 					try {
 						
-						mDecoder= new MediaDecoder(file_Path,mOutputSurface,mWidth,mHeight,mHolder);						
+                        mDecoder= new MediaDecoder(file_Path,mWidth,mHeight,mHolder);												
 						mDecoder.doDecode();	
 						
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}			
-			}); t.start();
+			});
+			t.start();*/
 			
-			Log.v("Panel Activity","OutputSurface Created" );				
+			Log.v("Panel Activity","OutputSurface Created" );			
 			
 			
 		}
