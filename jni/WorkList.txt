@@ -1,0 +1,33 @@
+-- 30 Days development memo --
+
+2014/04/22
+
+Before start :
+
+Today's aim is to make the current codes more clean and readable. 
+
+To do list:
+
+1. Rearrange the code of the JNI parts, make sure all the .SO lib can work.
+2. Design the APPS whole architecture.  Confirm the the function of each parts.
+3. Follow the TDD rules, let the follower can take over my works easier. 
+4. Add pause and resume function on MediaDecoder.
+5. Rearrange the Output Surface code, add the JNI class.
+
+
+2014/04/28
+
+After one week fool around. I am ready to work. 
+Today's goal is finishing OutputSurface Rearrangement.
+
+
+2014/05/12
+
+Outputsurface determine the frame size(offscreen-render target).
+
+The real display surface used to display the result is defined in layout xml. 
+Which the size of its buffer can be change on your need. As long as its match the W/H ratio of the input video
+
+To do lost:
+1. Design the decode-->Post process(fragment shader or something else) --> display  architecture take these two states into consideration.
+2. 
