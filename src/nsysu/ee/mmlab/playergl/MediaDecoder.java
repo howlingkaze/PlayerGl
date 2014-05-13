@@ -27,7 +27,7 @@ public class MediaDecoder {
 	public MediaDecoder(String path ,OutputSurface out ,int width, int height ,SurfaceHolder mHolder)
 	{		
 		mPath = path;			
-		//mOutputSurface = out;
+		mOutputSurface = out;
 		initOutputSurface(width,height,mHolder);
 		initCodec();
 		
