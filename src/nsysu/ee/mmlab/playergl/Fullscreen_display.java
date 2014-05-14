@@ -151,7 +151,7 @@ public class Fullscreen_display extends Activity {
 				public void run() {
 					try {
 						
-						mDecoder= new MediaDecoder(file_Path,mWidth,mHeight,mHolder);						
+						mDecoder= new MediaDecoder(file_Path,1280,720,mHolder);						
 						mDecoder.doDecode();	
 						
 					} catch (Exception e) {

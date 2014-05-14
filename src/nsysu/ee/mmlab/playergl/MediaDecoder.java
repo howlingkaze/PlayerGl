@@ -23,7 +23,11 @@ public class MediaDecoder {
 	private int mVideoTrackIndex = -1;
 	private OutputSurface mOutputSurface;
 	private SurfaceHolder mSurfaceHolder;
-	private int mWidth,mHeight;
+	private int mWidth,mHeight,vWidth,vHeight;
+	
+	//Media Extractor
+	String mime;
+	MediaFormat mf;
 	
 	public MediaDecoder(String path ,int width, int height ,SurfaceHolder mHolder)
 	{		
@@ -36,7 +40,6 @@ public class MediaDecoder {
 		//initOutputSurface(mWidth,mHeight,mSurfaceHolder);
 		
 	}
-	
 	private boolean initCodec()
 	{
 		Log.i(TAG, "initCodec");
@@ -65,8 +68,15 @@ public class MediaDecoder {
 		
 		//Get MetaData from file		
 		mMediaExtractor.selectTrack(mVideoTrackIndex);
-		MediaFormat mf = mMediaExtractor.getTrackFormat(mVideoTrackIndex);
-		String mime = mf.getString(MediaFormat.KEY_MIME);
+		mf = mMediaExtractor.getTrackFormat(mVideoTrackIndex);
+		mime = mf.getString(MediaFormat.KEY_MIME);
+		vWidth = mf.getInteger(MediaFormat.KEY_WIDTH);
+		vHeight = mf.getInteger(MediaFormat.KEY_HEIGHT);
+		
+		
+		//Create Surface for 
+		initOutputSurface();
+			
 				
 		//Initial MediaCodec
 		mMediaCodec = MediaCodec.createDecoderByType(mime);		
@@ -79,9 +89,9 @@ public class MediaDecoder {
 		
 		return true;
 	}
-	private boolean initOutputSurface(int width, int height ,SurfaceHolder mHolder)
+	private boolean initOutputSurface()
 	{
-		mOutputSurface= new OutputSurface(width,height, mHolder);
+		mOutputSurface= new OutputSurface(mWidth,mHeight,vWidth,vHeight ,mSurfaceHolder);
 		
 		outputSurface = mOutputSurface.getSurface();	
 		
@@ -89,20 +99,21 @@ public class MediaDecoder {
 	}
 	
 	
-	
+	// 
 	public void doDecode()
 	{
 		
-				
-		//DecodeFrame();
-		
+
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				try {				
-					initOutputSurface(mWidth,mHeight,mSurfaceHolder);
-					initCodec();					
+				try {			
+					
+					initCodec();
+					
 					DecodeFrame();
+					ReleaseSource();
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

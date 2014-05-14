@@ -47,8 +47,10 @@ public class OutputSurface implements SurfaceTexture.OnFrameAvailableListener {
     private EGLDisplay mEGLDisplay = EGL14.EGL_NO_DISPLAY;
     private EGLContext mEGLContext = EGL14.EGL_NO_CONTEXT;
     private EGLSurface mEGLSurface = EGL14.EGL_NO_SURFACE;
-    int mWidth;
-    int mHeight;
+    
+    
+    //Video frame size  &  Screen Surface size
+    private int mWidth,mHeight,vWidth,vHeight;
     
     Bitmap pixels; // for software decoding or eglpixmapSurface
 
@@ -69,12 +71,15 @@ public class OutputSurface implements SurfaceTexture.OnFrameAvailableListener {
      * new EGL context and surface will be made current.  Creates a Surface that can be passed
      * to MediaCodec.configure().
      */
-    public OutputSurface(int width, int height, SurfaceHolder DrawOn) {
+    public OutputSurface(int width, int height,int vwidth,int vheight, SurfaceHolder DrawOn) {
         if (width <= 0 || height <= 0) {
             throw new IllegalArgumentException();
         }
         mWidth = width;
         mHeight = height;
+        vWidth=vwidth;
+        vHeight=vheight;
+        
         mOutputHolder= DrawOn;         
         
         
@@ -372,7 +377,7 @@ public class OutputSurface implements SurfaceTexture.OnFrameAvailableListener {
         
         //do nothing now
         NativeSetup();
-        setSurface(mOutputHolder.getSurface());
+        setSurface(mOutputHolder.getSurface(),mWidth,mHeight);
     }
   
         
@@ -394,7 +399,7 @@ public class OutputSurface implements SurfaceTexture.OnFrameAvailableListener {
     public static native void NativeSetup();    
     public static native void NaitveSourceInit();
     public static native void NaitveSourceRelease();
-    public static native void setSurface(Surface surface);
+    public static native void setSurface(Surface surface,int width,int height);
     public static native int  NaitveGetTexture(int width,int height);
     public static native void NativeDrawFrame();
     public static native void setFixedScale(int width,int height);

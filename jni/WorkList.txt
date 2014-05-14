@@ -31,3 +31,15 @@ Which the size of its buffer can be change on your need. As long as its match th
 To do list:
 1. Design the decode-->Post process(fragment shader or something else) --> display  architecture take these two states into consideration.
 2. Close the decoder right after the end of the video.  <==  
+
+
+2014/05/15
+
+Roughly done the surface view problem.
+
+Start study the Shader program.
+
+To do list 
+1. Finished the setting page. Including SQLite for saving the setting, and UI checked box for selected element. 
+
+

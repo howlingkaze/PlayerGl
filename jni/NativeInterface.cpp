@@ -77,7 +77,7 @@ void NativeDraw(JNIEnv *env, jclass thiz)
 }
 
 
-void Native_getSurface(JNIEnv *env, jclass thiz, jobject jsurface)
+void Native_getSurface(JNIEnv *env, jclass thiz, jobject jsurface,jint width,jint height)
 {
 	nativewindow = ANativeWindow_fromSurface(env, jsurface);
 	LOGV("ANativeWindow_fromSurface");
@@ -85,8 +85,10 @@ void Native_getSurface(JNIEnv *env, jclass thiz, jobject jsurface)
 	//nWidth = ANativeWindow_getWidth(nativewindow);
     //nHeight = ANativeWindow_getHeight(nativewindow);
 
-   nWidth = 1280;
-   nHeight = 720;
+	nWidth=width;
+	nHeight=height;
+   //nWidth = 1280;
+   //nHeight = 720;
 
 
 
@@ -105,7 +107,7 @@ void Native_getSurface(JNIEnv *env, jclass thiz, jobject jsurface)
 
 	//Glpixel =new GLubyte[nWidth * nHeight * 4];
 
-	char* temp = new GLubyte[nWidth * nHeight* 4];
+	GLubyte* temp = new GLubyte[nWidth * nHeight* 4];
 
 	memset (temp,255,nWidth * nHeight* 4);
 	memset (pixels,128,nWidth * nHeight* 3);
@@ -194,7 +196,7 @@ void NativesetFixedScale(int width,int height)
 
 static JNINativeMethod method_table[] = {
     { "NativeSetup", "()V", (void*)NativeSetup},
-    { "setSurface", "(Landroid/view/Surface;)V", (void*)Native_getSurface},
+    { "setSurface", "(Landroid/view/Surface;II)V", (void*)Native_getSurface},
     { "NaitveSourceInit", "()V", (void*)NativeInit},
     { "NaitveSourceRelease", "()V", (void*)NativeRelease},
     { "NaitveGetTexture", "(II)I", (void*)NativeGetOutputTexture},
