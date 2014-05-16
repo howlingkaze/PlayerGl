@@ -82,10 +82,9 @@ public class SettingPage extends Activity {
 		}
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_setting_page,
-					container, false);
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+		{
+			View rootView = inflater.inflate(R.layout.fragment_setting_page,container, false);
 			return rootView;
 		}
 		
@@ -108,7 +107,8 @@ public class SettingPage extends Activity {
 	 
 	        expListView.setOnChildClickListener(new OnChildClickListener() {
 	 
-	            public boolean onChildClick(ExpandableListView parent, View v,int groupPosition, int childPosition, long id) {
+	            public boolean onChildClick(ExpandableListView parent, View v,int groupPosition, int childPosition, long id)
+	            {
 	                final String selected = (String) expListAdapter.getChild(groupPosition, childPosition);
 	                Toast.makeText(getActivity().getBaseContext(), selected, Toast.LENGTH_LONG).show();	 
 	                return true;
@@ -166,8 +166,7 @@ public class SettingPage extends Activity {
 	        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 	        int width = dm.widthPixels;
 	 
-	        expListView.setIndicatorBounds(width - getDipsFromPixel(35), width
-	                - getDipsFromPixel(5));
+	        expListView.setIndicatorBounds(width - getDipsFromPixel(35), width- getDipsFromPixel(5));
 	    }
 	 
 	    // Convert pixel to dip
