@@ -10,6 +10,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,13 +22,16 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Build;
 import nsysu.ee.mmlab.playergl.SettingPage;
 
 public class SettingPage extends Activity {
-
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,10 +77,11 @@ public class SettingPage extends Activity {
 	 */
 	public static class PlaceholderFragment extends Fragment {
 
-		List<String> groupList;
+		List<String> groupList; 
 	    List<String> childList;
 	    Map<String, List<String>> SettingMenu;
 	    ExpandableListView expListView;
+	    TextView SelectedGroupText;
 		
 		public PlaceholderFragment() {
 		}
@@ -98,8 +103,7 @@ public class SettingPage extends Activity {
 	        createSubSelection();
 	 
 	        expListView = (ExpandableListView) getActivity().findViewById(R.id.expandableListView1);
-	        final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
-	        		getActivity(), groupList,SettingMenu);
+	        final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(getActivity(), groupList,SettingMenu);
 	        
 	        expListView.setAdapter(expListAdapter);
 	 
@@ -110,12 +114,35 @@ public class SettingPage extends Activity {
 	            public boolean onChildClick(ExpandableListView parent, View v,int groupPosition, int childPosition, long id)
 	            {
 	                final String selected = (String) expListAdapter.getChild(groupPosition, childPosition);
-	                Toast.makeText(getActivity().getBaseContext(), selected, Toast.LENGTH_LONG).show();	 
+	                
+	                String group = (String) expListAdapter.getGroup(groupPosition);
+	                //TextView temp= (TextView) v.findViewById(R.id.Selected);
+	                //temp.setText(selected);
+              	    Log.v("in childClickListner","click!");
+	                //Toast.makeText(getActivity().getBaseContext(), selected, Toast.LENGTH_LONG).show();	 
+              	    parent.collapseGroup(groupPosition);
+              	  SelectedGroupText.setText(selected);
 	                return true;
 	            }
 	        });
-				
-					
+	        /*
+	        expListView.setOnGroupExpandListener(new OnGroupExpandListener() {  
+	            @Override  
+	            public void onGroupExpand(int groupPosition) {  
+	                
+	            }  
+	        });  */
+	        expListView.setOnGroupClickListener(new OnGroupClickListener() {  
+	            @Override  
+	            public boolean onGroupClick(ExpandableListView parent, View clickedView, int groupPosition, long groupId) {  
+	                 
+	            	SelectedGroupText= (TextView)clickedView.findViewById(R.id.Selected);
+	            	if(SelectedGroupText==null)
+	            		Log.v("OnGroupClickListener","Can't get current Expanded textView");
+	            	            	
+	                return false;  
+	            }  
+	        });	
 			
 		}	
 		private void createGroupList() {

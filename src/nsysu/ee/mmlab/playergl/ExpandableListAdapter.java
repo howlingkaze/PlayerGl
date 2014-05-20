@@ -24,6 +24,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Activity context;
     private Map<String, List<String>> SettingMenu;
     private List<String> Menu;
+    private TextView selectedView = null;
  
     public ExpandableListAdapter(Activity context, List<String> Menu,
             Map<String, List<String>> SettingMenu) {
@@ -40,8 +41,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return childPosition;
     }
  
-    public View getChildView(final int groupPosition, final int childPosition,
-            boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent)
+    {
+    	Log.v("getChildView","Called");
         final String selection = (String) getChild(groupPosition, childPosition);
         LayoutInflater inflater = context.getLayoutInflater();
  
@@ -50,7 +52,26 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
  
         TextView item = (TextView) convertView.findViewById(R.id.Selection);
+        
+        
+        item.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				Log.v("getChildView","child clicked");
+				if(selectedView != null)
+				{
+					selectedView.setText(selection);
+				}
+				
+			}
+        	
+        	
+        	
+        });
+        
  
+        
+        
         //ImageView delete = (ImageView) convertView.findViewById(R.id.delete);
         /*
         delete.setOnClickListener(new OnClickListener() {
@@ -78,7 +99,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 alertDialog.show();
             }
         });*/
- 
+        
+        
+        
         item.setText(selection);
         return convertView;
     }
@@ -100,17 +123,28 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
  
     public View getGroupView(int groupPosition, boolean isExpanded,View convertView, ViewGroup parent)
-    {
+    {    	
         String selectionName = (String) getGroup(groupPosition);
         if (convertView == null)
         {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.setting_layer1,
-                    null);
+            convertView = infalInflater.inflate(R.layout.setting_layer1,null);
         }
         TextView item = (TextView) convertView.findViewById(R.id.Selection);
         item.setTypeface(null, Typeface.BOLD);
         item.setText(selectionName);
+        if(isExpanded)
+        {
+        	selectedView = (TextView)convertView.findViewById(R.id.Selected);
+        }
+        else
+        {
+        	selectedView = null;
+        }
+        
+        Log.v("getGroupView","Called");
+        
+        
         return convertView;
     }
  
