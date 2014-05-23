@@ -81,7 +81,9 @@ public class SettingPage extends Activity {
 	    List<String> childList;
 	    Map<String, List<String>> SettingMenu;
 	    ExpandableListView expListView;
-	    TextView SelectedGroupText;
+	    TextView SelectedGroupText;	    
+	    SQLhelper  myDBhelper;
+	    
 		
 		public PlaceholderFragment() {
 		}
@@ -142,9 +144,19 @@ public class SettingPage extends Activity {
 	            	            	
 	                return false;  
 	            }  
-	        });	
+	        });
+	        
+	        dbInitialized();
 			
 		}	
+		// This parts is for database access
+		private void dbInitialized()
+		{
+			myDBhelper.getWritableDatabase();
+		}
+		
+		
+		//
 		private void createGroupList() {
 	        groupList = new ArrayList<String>();
 	        groupList.add("Test Method");
