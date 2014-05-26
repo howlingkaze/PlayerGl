@@ -24,7 +24,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Activity context;
     private Map<String, List<String>> SettingMenu;
     private List<String> Menu;
-    private TextView selectedView = null;
+    private Map<String,String> SavedSetting;
  
     public ExpandableListAdapter(Activity context, List<String> Menu,
             Map<String, List<String>> SettingMenu) {
@@ -52,60 +52,19 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
  
         TextView item = (TextView) convertView.findViewById(R.id.Selection);
-        
-        
-        item.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				Log.v("getChildView","child clicked");
-				if(selectedView != null)
-				{
-					selectedView.setText(selection);
-				}
-				
-			}
-        	
-        	
-        	
-        });
-        
- 
-        
-        
-        //ImageView delete = (ImageView) convertView.findViewById(R.id.delete);
-        /*
-        delete.setOnClickListener(new OnClickListener() {
- 
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Do you want to remove?");
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                List<String> child =
-                                    SettingMenu.get(Menu.get(groupPosition));
-                                child.remove(childPosition);
-                                notifyDataSetChanged();
-                            }
-                        });
-                builder.setNegativeButton("No",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-            }
-        });*/
-        
-        
-        
+           
         item.setText(selection);
         return convertView;
     }
- 
+    public void setSelectedSetting(Map<String,String> Selected)
+    {
+    	SavedSetting=Selected;
+    }
+    public String getSelectedSetting(int Groupid)
+    {
+    	String temp="Default";
+    	return temp;
+    }
     public int getChildrenCount(int groupPosition) {
         return SettingMenu.get(Menu.get(groupPosition)).size();
     }
@@ -133,14 +92,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView item = (TextView) convertView.findViewById(R.id.Selection);
         item.setTypeface(null, Typeface.BOLD);
         item.setText(selectionName);
-        if(isExpanded)
-        {
-        	selectedView = (TextView)convertView.findViewById(R.id.Selected);
-        }
-        else
-        {
-        	selectedView = null;
-        }
+       	TextView selected = (TextView)convertView.findViewById(R.id.Selected);
+       	
+       	selected.setText(getSelectedSetting(groupPosition));
         
         Log.v("getGroupView","Called");
         

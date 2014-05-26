@@ -2,6 +2,7 @@ package nsysu.ee.mmlab.playergl;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -12,22 +13,9 @@ public class SQLhelper extends SQLiteOpenHelper {
 	
     private final static int DATABASE_VERSION=1;    
     
-    private final static String TABLE_NAME="Setting"; // db Name??
-    
-    
-    /** 
-     * CREATE TABLE IF NOT EXISTS display_config .setting(
-     * id INTEGER PRIMARY KEY ASC,
-	   groupid INTEGER,
-	   group_name TEXT,
-	   attr INTEGER,
-	   attr_name TEXT,							
-		);
-		
-		//form structure
-	
-     */
-    
+    private final static String TABLE_NAME="DisplaySetting"; // db Name??
+   
+    //Associated SQLite instructions are in jin/SQLite.txt which have been tested.
 	
 	public SQLhelper(Context context, String name, CursorFactory factory,
 			int version) {
@@ -44,14 +32,12 @@ public class SQLhelper extends SQLiteOpenHelper {
 				"CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
 				"( "+
 				"id INTEGER PRIMARY KEY ASC,"+
-				"groupid INTEGER,"+
-				"group_name TEXT,"+
-				"attr INTEGER,"+
-				" attr_name TEXT,"+
+				"groupid INTEGER,"+				
+				"attr INTEGER"+			
 				");";
 		
-		db.execSQL(SQL);				
-	  
+		db.execSQL(SQL);			
+		
 	}
 
 	@Override
@@ -61,15 +47,22 @@ public class SQLhelper extends SQLiteOpenHelper {
 	}
 	
 	
-	public void insert(String Title)
+	public void insert(int groupid,int childid)
     {
-		/*
-        SQLiteDatabase db=this.getWritableDatabase();
-        ContentValues cv=new ContentValues(); 
-        cv.put(FIELD_TITLE, Title);
-        long row=db.insert(TABLE_NAME, null, cv);
-        return row;*/
+		String SQL = "INSERT INTO ?(id,groupid,attr) VALUES (NULL,?,?);";
+		SQLiteDatabase db=this.getWritableDatabase();
+		db.execSQL(SQL,new String[]{TABLE_NAME,Integer.toBinaryString(groupid),Integer.toBinaryString(childid)});
+
     }
+	int getAttr(int groupid)
+	{
+		String SQL = "SELECT * FROM ? WHERE groupid=?;";
+		SQLiteDatabase db=this.getWritableDatabase();
+		Cursor cr = db.rawQuery(SQL,new String[]{TABLE_NAME,Integer.toBinaryString(groupid)});
+		cr.moveToFirst();
+		int attr=cr.getInt(2); // id:0 groups:1 attr:2
+		return attr;
+	}
     
     public void delete(int id)
     {
@@ -77,28 +70,23 @@ public class SQLhelper extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getWritableDatabase();
         String where=FIELD_ID+"=?";
         String[] whereValue={Integer.toString(id)};
-        db.delete(TABLE_NAME, where, whereValue);*/
+        db.delete(TABLE_NAME, where, whereValue);
+        */
     }
     
-    public void update(int id,String Title)
+    public void update(int updateTarget,int value)
     {
-    	/*
-        SQLiteDatabase db=this.getWritableDatabase();
-        String where=FIELD_ID+"=?";
-        String[] whereValue={Integer.toString(id)};
-        ContentValues cv=new ContentValues(); 
-        cv.put(FIELD_TITLE, Title);
-        db.update(TABLE_NAME, cv, where, whereValue);
-        */
+    	String SQL = "UPDATE ? SET attr=? WHERE groupid=? ;";
+    	SQLiteDatabase db=this.getWritableDatabase();
+		db.execSQL(SQL,new String[]{TABLE_NAME,Integer.toBinaryString(value),Integer.toBinaryString(updateTarget)});
     }
     public void dropTable(String dbname)
     {
-    	
+    	String SQL ="DROP TABLE IF EXIST setting";
+    	SQLiteDatabase db=this.getWritableDatabase();
+		db.execSQL(SQL,null);
     }
     
-    public void buildDefaultTable()
-    {
-    	
-    }    
+  
 
 }

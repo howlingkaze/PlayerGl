@@ -1,0 +1,23 @@
+Create Table
+
+CREATE TABLE IF NOT EXISTS setting(
+	id INTEGER PRIMARY KEY ASC,
+	groupid INTEGER,	
+	attr INTEGER						
+);
+	
+	
+Insert data
+
+INSERT INTO setting(id,groupid,attr)
+	VALUES (NULL,1,2);
+	
+	
+update
+
+UPDATE setting SET attr="2" WHERE groupid="3";
+
+
+Select 
+
+SELECT * FROM setting WHERE groupid=1;

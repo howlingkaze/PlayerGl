@@ -79,10 +79,13 @@ public class SettingPage extends Activity {
 
 		List<String> groupList; 
 	    List<String> childList;
-	    Map<String, List<String>> SettingMenu;
+	    Map<String, List<String>> SettingMenu;	    
+	    Map<String,String> NowSetting;
 	    ExpandableListView expListView;
 	    TextView SelectedGroupText;	    
 	    SQLhelper  myDBhelper;
+	    
+	    
 	    
 		
 		public PlaceholderFragment() {
@@ -121,19 +124,17 @@ public class SettingPage extends Activity {
 	                //TextView temp= (TextView) v.findViewById(R.id.Selected);
 	                //temp.setText(selected);
               	    Log.v("in childClickListner","click!");
-	                //Toast.makeText(getActivity().getBaseContext(), selected, Toast.LENGTH_LONG).show();	 
+	                //Toast.makeText(getActivity().getBaseContext(), selected, Toast.LENGTH_LONG).show();
+              	    
+              	    
+              	    
+              	    
               	    parent.collapseGroup(groupPosition);
-              	  SelectedGroupText.setText(selected);
+              	    SelectedGroupText.setText(selected);
 	                return true;
 	            }
 	        });
-	        /*
-	        expListView.setOnGroupExpandListener(new OnGroupExpandListener() {  
-	            @Override  
-	            public void onGroupExpand(int groupPosition) {  
-	                
-	            }  
-	        });  */
+
 	        expListView.setOnGroupClickListener(new OnGroupClickListener() {  
 	            @Override  
 	            public boolean onGroupClick(ExpandableListView parent, View clickedView, int groupPosition, long groupId) {  
@@ -152,7 +153,8 @@ public class SettingPage extends Activity {
 		// This parts is for database access
 		private void dbInitialized()
 		{
-			myDBhelper.getWritableDatabase();
+			myDBhelper.getWritableDatabase();			
+			
 		}
 		
 		
