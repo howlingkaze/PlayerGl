@@ -42,4 +42,9 @@ Start study the Shader program.
 To do list 
 1. Finished the setting page. Including SQLite for saving the setting, and UI checked box for selected element. 
 
+2014/06/09
+
+1. Review the previous works of Sqlite.
+2. Slide-able backlight/Color adjustment -- for collect and perform the dimmed methods. 
+
 

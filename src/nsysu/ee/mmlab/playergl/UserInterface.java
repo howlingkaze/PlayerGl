@@ -51,7 +51,13 @@ public class UserInterface extends Activity {
 	        intent.setClass(UserInterface.this, SettingPage.class);		        ;
 	        startActivity(intent);			
 			//return true;
-		}		
+		}
+		else if(id == R.id.color_backlit_test)
+		{
+			Intent intent = new Intent();
+	        intent.setClass(UserInterface.this, BacklitVsColorTest.class);		        ;
+	        startActivity(intent);	
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -65,8 +71,7 @@ public class UserInterface extends Activity {
 		TextView filepath_content;
 		Button button1,button2;				
 		SurfaceView mSurfaceView;
-		SurfaceHolder mHolder;
-		
+		SurfaceHolder mHolder;		
 		MediaDecoder mDecoder;
 		int mHeight,mWidth;
 		

@@ -147,7 +147,7 @@ public class SettingPage extends Activity {
 	            }  
 	        });
 	        
-	        dbInitialized();
+	        //dbInitialized();
 			
 		}	
 		// This parts is for database access

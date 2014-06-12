@@ -21,3 +21,6 @@ UPDATE setting SET attr="2" WHERE groupid="3";
 Select 
 
 SELECT * FROM setting WHERE groupid=1;
+
+
+/// Perhaps there exist some kind of resource control class, so we don't need to actually finished this. 

@@ -5,11 +5,15 @@
     <string name="text_view_title1">File Path</string>
     <string name="text_view_content1">/--No default path--/</string>
     <string name="action_settings">Settings</string>
+    <string name="display_test">Display Configure</string>
     <string name="text_view_title2">Applied methods</string>
     <string name="text_view_content2">/--Undetermined--/</string>
     <string name="button_1">Start</string>
     <string name="button_2">Full Screen Test</string>
-    <string name="title_activity_fullscreen_display">Fullscreen_display</string>    
+    <string name="title_activity_fullscreen_display">Fullscreen_display</string>
     <string name="title_activity_setting_page">SettingPage</string>
+    <string name="title_activity_backlit_vs_color_test">BacklitVsColorTest</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="bcklit_num">000</string>
 
 </resources>
