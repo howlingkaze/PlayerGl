@@ -70,13 +70,19 @@ public class BacklitVsColorTest extends Activity {
 		boolean Scale_region_touched=false;
 		
 		
-		int backlight_sacle[] = {25,35,45,55,65,75};
-		TextView scaleTextView;
+		int backlight_sacle[] = {65,75,85,95,105};
+		int oneChannelColorScale[] = {255,235,223,209,200};
+		//Blue 255 234 221 204 189 
 		
 		
-		int bl_scale= 0;
+		TextView scaleTextView,dragScaleTextView;
+
+		int drag_scale=0;
 		
-		int PrimayColor[] = {Color.rgb(255,0,0),Color.rgb(0,255,0),Color.rgb(0,0,255)};		
+		int slide_count=0;
+		int slide_level=5;
+		
+		
 		int colorNumber=3;
 		int colorChangeCount =0;
 		float left_scale_var_size=0.2f;
@@ -84,10 +90,7 @@ public class BacklitVsColorTest extends Activity {
 	    Context mcontext;
 	    ContentResolver cResolver;
 		
-		int oneChannelColorScale[] = {25,35,45,55,65,75};
-		
-		
-		final float clickDisThreshold = 0.02f;
+		final float clickDisThreshold = 0.02f; 
 		final long clickTimeThreshold = 2000;
 		
 		
@@ -125,19 +128,24 @@ public class BacklitVsColorTest extends Activity {
 		             	    break;    	
 		                }
 			           	case MotionEvent.ACTION_MOVE : {
-			           		
-			           		
-			           		Log.v("Rootview Move","x: "+Float.toString(px)+" y: "+Float.toString(py));
+		           					           		
 			           		if( init_x > src_x*left_scale_var_size)
-			           			Scale_region_touched =false;      		 		
+			           		{
+			           			Scale_region_touched =false;
+			           			break;
+			           		}
+			           		Log.v("Rootview Move","x: "+Float.toString(px)+" y: "+Float.toString(py));
 			           		
 			           		if(Scale_region_touched == true)
 			           		{
+			           			drag_scale = oneChannelColorScale[slide_count]; 
+			           			drag_scale += ((pre_y-py)/5);
+			           			if(drag_scale > 255) drag_scale=255;
+			           			if(drag_scale < 0)drag_scale=0;			           			
+			           			oneChannelColorScale[slide_count] = drag_scale;
+			           			drawOnViewSingleColor(oneChannelColorScale[slide_count],colorChangeCount);
+			           			oneChannelColorScale[slide_count]=drag_scale;
 			           			
-			           			bl_scale += ((pre_y-py)/5);
-			           			if(bl_scale > 255) bl_scale=255;
-			           			if(bl_scale < 0)bl_scale=0;
-			           			scaleTextView.setText(Float.toString(bl_scale));			           			
 			           			//Log.v("In move scale",Float.toString(bl_scale));
 			           			pre_x=px;
 				               	pre_y=py;
@@ -162,24 +170,32 @@ public class BacklitVsColorTest extends Activity {
 		                		
 		                		if(Math.abs(diffx) > Math.abs(diffy))
 		                		{
-		                			// vertical 
+		                			// horizontal 
 		                			if( diffx > 0)
 		                			{		                				
-		                				bl_scale++;
-		                				bl_scale=(bl_scale+5)%5;
-		                				BlChange(backlight_sacle[bl_scale]);
+		                				slide_count++;
+		                				if (slide_count >= slide_level -1)
+		                				slide_count= slide_level-1;
+		                				
+		                				BlChange(backlight_sacle[slide_count]);
 		                				Log.v("Touch Event","slide right");
 		                			}else
 		                			{		                			
-		                				bl_scale--;
-		                				bl_scale=(bl_scale+5)%5;
-		                				BlChange(backlight_sacle[bl_scale]);
+		                				slide_count--;
+		                				if (slide_count < 0)
+			                				slide_count= 0;
+		                				BlChange(backlight_sacle[slide_count]);
 		                				Log.v("Touch Event","slide left");
 		                			}
+		                			drag_scale = oneChannelColorScale[slide_count];
+		                			dragScaleTextView.setText(Float.toString(drag_scale));
+		                			drawOnViewSingleColor(oneChannelColorScale[slide_count],colorChangeCount);
 		                			
+		                			
+		                			scaleTextView.setText("BL:"+Integer.toString(slide_count));
 		                		}else
 		                		{
-		                			//horizontal
+		                			//vertical
 		                			if( diffy > 0)
 		                			{		                				
 		                				Log.v("Touch Event","slide down");
@@ -189,14 +205,17 @@ public class BacklitVsColorTest extends Activity {
 		                				Log.v("Touch Event","slide top");
 		                				colorChangeCount++;
 		                			}
-		                			if (colorChangeCount< 0) colorChangeCount+=colorNumber;
-		                			drawOnViewSingleColor(PrimayColor[(colorChangeCount)%colorNumber]);		                			
-		                		}
+		                			if (colorChangeCount< 0)
+		                				colorChangeCount+=colorNumber;
+		                			drawOnViewSingleColor(oneChannelColorScale[slide_count],colorChangeCount%3);	
+		                			
+		                		}                		
 		                		
-		                		Log.v("Touch Event"," Slide");
-		                	}		                	
+		                	}
+		                	Scale_region_touched= false;
+		                	break;
 		                }
-			           	Scale_region_touched= false;
+			           	
 		            }
 		           	return true;
 				}
@@ -208,7 +227,8 @@ public class BacklitVsColorTest extends Activity {
 		{
 			super.onCreate(savedInstanceState);  	
 			
-			scaleTextView = (TextView)getActivity().findViewById(R.id.textViewBlScale);	
+			dragScaleTextView = (TextView)getActivity().findViewById(R.id.textViewDragScale);
+			scaleTextView = (TextView)getActivity().findViewById(R.id.textViewBlScale);
 			
 			mSurfaceView = (SurfaceView)getActivity().findViewById(R.id.surfaceViewColorTest);	
 			mSurfaceHolder = mSurfaceView.getHolder();
@@ -222,7 +242,7 @@ public class BacklitVsColorTest extends Activity {
 					src_x = width;
 					src_y = height;
 		           	Log.v("Surface Create","width: "+Integer.toString(src_x)+" height: "+Integer.toString(src_y));
-					
+		           	drawOnViewSingleColor(oneChannelColorScale[slide_count],colorChangeCount);						
 				}
 				@Override
 				public void surfaceCreated(SurfaceHolder holder) {					
@@ -230,21 +250,21 @@ public class BacklitVsColorTest extends Activity {
 				@Override
 				public void surfaceDestroyed(SurfaceHolder holder) {					
 				}
-				
 			});
-			
-	
 			
 			mcontext = getActivity().getApplicationContext();
 			cResolver=mcontext.getContentResolver();
+					
+			BlChange(backlight_sacle[slide_count]);			
 		}		
 		
-		public void drawOnViewSingleColor(int color) //
-		{
-				
-			Canvas canvas = mSurfaceHolder.lockCanvas();
-			canvas.drawColor(color);			
+		public void drawOnViewSingleColor(int greylevel,int color) // color B:0 ,G:1,  R:2
+		{		
+			int drawOn = (greylevel << (color *8))+0Xff000000;					
+			Canvas canvas = mSurfaceHolder.lockCanvas();			
+			canvas.drawColor(drawOn);			
 			mSurfaceHolder.unlockCanvasAndPost(canvas);
+			dragScaleTextView.setText(Float.toString(greylevel));
 		}
 		public void BlChange(int bl)
 		{			

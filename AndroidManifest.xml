@@ -40,13 +40,26 @@
             android:parentActivityName="nsysu.ee.mmlab.playergl.@string/title_activity_setting_page" >
         </activity>
         <activity
-            android:name="nsysu.ee.mmlab.playergl.TestSettingsActivity"
-            android:label="@string/title_activity_test_settings" >
+            android:name="nsysu.ee.mmlab.playergl.BacklitVsColorTest"
+            android:label="@string/title_activity_backlit_vs_color_test"
+            android:parentActivityName="nsysu.ee.mmlab.playergl.@string/title_activity_setting_page"
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
         </activity>
         <activity
-            android:name="nsysu.ee.mmlab.playergl.BacklitVsColorTest"
-            android:label="@string/title_activity_backlit_vs_color_test" android:parentActivityName="@string/title_activity_setting_page"
-            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen">
+            android:name="nsysu.ee.mmlab.playergl.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="nsysu.ee.mmlab.playergl.UserInterface" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nsysu.ee.mmlab.playergl.UserInterface" />
+        </activity>
+        <activity
+            android:name="nsysu.ee.mmlab.playergl.SettingPage2"
+            android:label="@string/title_activity_setting_page2"
+            android:parentActivityName="nsysu.ee.mmlab.playergl.UserInterface" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nsysu.ee.mmlab.playergl.UserInterface" />
         </activity>
     </application>
 

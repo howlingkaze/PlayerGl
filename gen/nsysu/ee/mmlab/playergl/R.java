@@ -31,40 +31,44 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int Selected=0x7f0a000d;
-        public static final int Selection=0x7f0a000c;
-        public static final int action_settings=0x7f0a000e;
-        public static final int button1=0x7f0a000a;
-        public static final int button2=0x7f0a000b;
-        public static final int color_backlit_test=0x7f0a000f;
+        public static final int Selected=0x7f0a000e;
+        public static final int Selection=0x7f0a000d;
+        public static final int action_settings=0x7f0a000f;
+        public static final int button1=0x7f0a000b;
+        public static final int button2=0x7f0a000c;
+        public static final int color_backlit_test=0x7f0a0010;
         public static final int container=0x7f0a0000;
-        public static final int expandableListView1=0x7f0a0004;
-        public static final int surfaceView1=0x7f0a0009;
-        public static final int surfaceView2=0x7f0a0003;
+        public static final int expandableListView1=0x7f0a0005;
+        public static final int surfaceView1=0x7f0a000a;
+        public static final int surfaceView2=0x7f0a0004;
         public static final int surfaceViewColorTest=0x7f0a0001;
-        public static final int textView1=0x7f0a0006;
-        public static final int textView2=0x7f0a0005;
-        public static final int textView3=0x7f0a0007;
-        public static final int textView4=0x7f0a0008;
-        public static final int textViewBlScale=0x7f0a0002;
+        public static final int textView1=0x7f0a0007;
+        public static final int textView2=0x7f0a0006;
+        public static final int textView3=0x7f0a0008;
+        public static final int textView4=0x7f0a0009;
+        public static final int textViewBlScale=0x7f0a0003;
+        public static final int textViewDragScale=0x7f0a0002;
     }
     public static final class layout {
         public static final int activity_backlit_vs_color_test=0x7f030000;
         public static final int activity_fullscreen_display=0x7f030001;
         public static final int activity_setting_page=0x7f030002;
-        public static final int activity_user_interface=0x7f030003;
-        public static final int fragment_backlit_vs_color_test=0x7f030004;
-        public static final int fragment_fullscreen_display=0x7f030005;
-        public static final int fragment_setting_page=0x7f030006;
-        public static final int fragment_user_interface=0x7f030007;
-        public static final int setting_layer1=0x7f030008;
-        public static final int setting_layer2=0x7f030009;
+        public static final int activity_setting_page2=0x7f030003;
+        public static final int activity_user_interface=0x7f030004;
+        public static final int fragment_backlit_vs_color_test=0x7f030005;
+        public static final int fragment_fullscreen_display=0x7f030006;
+        public static final int fragment_setting_page=0x7f030007;
+        public static final int fragment_setting_page2=0x7f030008;
+        public static final int fragment_user_interface=0x7f030009;
+        public static final int setting_layer1=0x7f03000a;
+        public static final int setting_layer2=0x7f03000b;
     }
     public static final class menu {
         public static final int backlit_vs_color_test=0x7f090000;
         public static final int fullscreen_display=0x7f090001;
         public static final int setting_page=0x7f090002;
-        public static final int user_interface=0x7f090003;
+        public static final int setting_page2=0x7f090003;
+        public static final int user_interface=0x7f090004;
     }
     public static final class string {
         public static final int action_settings=0x7f060003;
@@ -74,27 +78,27 @@ public final class R {
         public static final int button_2=0x7f060008;
         public static final int display_test=0x7f060004;
         public static final int hello_world=0x7f06000c;
-        public static final int pref_default_display_name=0x7f060013;
-        public static final int pref_description_social_recommendations=0x7f060011;
+        public static final int pref_default_display_name=0x7f060014;
+        public static final int pref_description_social_recommendations=0x7f060012;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f060015;
+        public static final int pref_header_data_sync=0x7f060016;
         /**  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f06000f;
+        public static final int pref_header_general=0x7f060010;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f060018;
-        public static final int pref_ringtone_silent=0x7f06001b;
-        public static final int pref_title_add_friends_to_messages=0x7f060014;
-        public static final int pref_title_display_name=0x7f060012;
-        public static final int pref_title_new_message_notifications=0x7f060019;
-        public static final int pref_title_ringtone=0x7f06001a;
-        public static final int pref_title_social_recommendations=0x7f060010;
-        public static final int pref_title_sync_frequency=0x7f060016;
-        public static final int pref_title_system_sync_settings=0x7f060017;
-        public static final int pref_title_vibrate=0x7f06001c;
+        public static final int pref_header_notifications=0x7f060019;
+        public static final int pref_ringtone_silent=0x7f06001c;
+        public static final int pref_title_add_friends_to_messages=0x7f060015;
+        public static final int pref_title_display_name=0x7f060013;
+        public static final int pref_title_new_message_notifications=0x7f06001a;
+        public static final int pref_title_ringtone=0x7f06001b;
+        public static final int pref_title_social_recommendations=0x7f060011;
+        public static final int pref_title_sync_frequency=0x7f060017;
+        public static final int pref_title_system_sync_settings=0x7f060018;
+        public static final int pref_title_vibrate=0x7f06001d;
         public static final int text_view_content1=0x7f060002;
         public static final int text_view_content2=0x7f060006;
         public static final int text_view_title1=0x7f060001;
@@ -102,7 +106,8 @@ public final class R {
         public static final int title_activity_backlit_vs_color_test=0x7f06000b;
         public static final int title_activity_fullscreen_display=0x7f060009;
         public static final int title_activity_setting_page=0x7f06000a;
-        public static final int title_activity_test_settings=0x7f06000e;
+        public static final int title_activity_setting_page2=0x7f06000e;
+        public static final int title_activity_settings=0x7f06000f;
     }
     public static final class style {
         /** 

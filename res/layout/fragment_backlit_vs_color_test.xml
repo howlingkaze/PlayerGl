@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true" />
 
     <TextView
-        android:id="@+id/textViewBlScale"
+        android:id="@+id/textViewDragScale"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -22,5 +22,13 @@
         android:layout_marginTop="46dp"
         android:text="000"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textViewBlScale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="BL:0" />
 
 </RelativeLayout>

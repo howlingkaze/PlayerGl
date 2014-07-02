@@ -15,5 +15,6 @@
     <string name="title_activity_backlit_vs_color_test">BacklitVsColorTest</string>
     <string name="hello_world">Hello world!</string>
     <string name="bcklit_num">000</string>
+    <string name="title_activity_setting_page2">SettingPage2</string>
 
 </resources>
